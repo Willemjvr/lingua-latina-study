@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lingua Latina Study</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-dark">
+  <div id="file-confirm" class="overlay hidden">
+    <div class="dialog">
+      <h2>Confirm PDF Files</h2>
+      <p>We found these candidates. Confirm or browse manually.</p>
+      <div class="file-row">
+        <label>Reading Book</label>
+        <div class="file-input-group">
+          <input id="reading-path" type="text" readonly>
+          <button id="reading-browse">Browse</button>
+        </div>
+      </div>
+      <div class="file-row">
+        <label>Exercises Book</label>
+        <div class="file-input-group">
+          <input id="exercises-path" type="text" readonly>
+          <button id="exercises-browse">Browse</button>
+        </div>
+      </div>
+      <div class="dialog-actions">
+        <button id="confirm-files" class="primary">Start Reading</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="main">
+    <div id="toolbar">
+      <div class="toolbar-group">
+        <button id="notes-toggle" title="Toggle Notes (Ctrl+N)">Notes</button>
+        <button id="theme-toggle" title="Toggle Theme">Theme</button>
+      </div>
+      <div class="toolbar-group">
+        <button id="export-md">Export Notes</button>
+        <button id="export-data">Export Data</button>
+        <button id="import-data">Import Data</button>
+        <button id="export-pdf">Export PDF</button>
+      </div>
+      <div class="toolbar-group">
+        <span id="status">Ready</span>
+      </div>
+    </div>
+    <div id="workspace">
+      <div id="left-pane" class="pane" data-pane="reading">
+        <div class="pane-header">
+          <span class="pane-title">Reading</span>
+          <div class="pane-tools">
+            <input class="page-input" type="text" inputmode="numeric" title="Page (Ctrl+G)">
+            <span class="page-count"></span>
+            <button class="prev-page">&#8593;</button>
+            <button class="next-page">&#8595;</button>
+            <button class="fit-width" title="Fit Width">Fit</button>
+            <button class="zoom-out">-</button>
+            <span class="zoom-level">100%</span>
+            <button class="zoom-in">+</button>
+            <button class="last-pos" title="Last Position">&#8634;</button>
+          </div>
+        </div>
+        <div class="pane-body">
+          <div class="canvas-scroll">
+            <div class="page-stage"></div>
+          </div>
+        </div>
+      </div>
+      <div id="splitter-h" class="splitter"></div>
+      <div id="right-pane" class="pane" data-pane="exercises">
+        <div class="pane-header">
+          <span class="pane-title">Exercises</span>
+          <div class="pane-tools">
+            <input class="page-input" type="text" inputmode="numeric" title="Page (Ctrl+G)">
+            <span class="page-count"></span>
+            <button class="prev-page">&#8593;</button>
+            <button class="next-page">&#8595;</button>
+            <button class="fit-width" title="Fit Width">Fit</button>
+            <button class="zoom-out">-</button>
+            <span class="zoom-level">100%</span>
+            <button class="zoom-in">+</button>
+            <button class="last-pos" title="Last Position">&#8634;</button>
+          </div>
+        </div>
+        <div class="pane-body">
+          <div class="canvas-scroll">
+            <div class="page-stage"></div>
+          </div>
+          <div class="draw-tools">
+            <button data-tool="text" class="active" title="Text tool (default)">T</button>
+            <button data-tool="pen" title="Pen">Pen</button>
+            <button data-tool="highlighter" title="Highlighter">Hi</button>
+            <button data-tool="eraser" title="Eraser">Er</button>
+            <input type="color" id="ink-color" value="#2563eb">
+            <input type="range" id="ink-size" min="1" max="10" value="2">
+            <button id="undo" title="Undo (Ctrl+Z)">Undo</button>
+            <button id="redo" title="Redo (Ctrl+Y)">Redo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="notes-sidebar" class="hidden">
+      <div class="notes-header">
+        <h3>Notes</h3>
+        <input id="notes-search" type="text" placeholder="Search notes...">
+      </div>
+      <div id="notes-list"></div>
+    </div>
+  </div>
+
+  <div id="text-popup" class="popup hidden">
+    <button data-action="highlight" data-color="#facc15"></button>
+    <button data-action="highlight" data-color="#f87171"></button>
+    <button data-action="highlight" data-color="#4ade80"></button>
+    <button data-action="highlight" data-color="#60a5fa"></button>
+    <button data-action="note">Add Note</button>
+  </div>
+
+  <div id="page-note-popup" class="popup hidden">
+    <textarea placeholder="Note..."></textarea>
+    <div class="popup-actions">
+      <button class="save-note">Save</button>
+      <button class="cancel-note">Cancel</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

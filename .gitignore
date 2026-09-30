@@ -1,0 +1,10 @@
+node_modules/
+dist/
+build/
+LatinData/
+*.pdf
+*.exe
+.DS_Store
+npm-debug.log*
+.vscode/
+.idea/

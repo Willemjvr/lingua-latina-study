@@ -1,0 +1,41 @@
+{
+  "name": "lingua-latina-study",
+  "version": "1.0.0",
+  "description": "Minimal side-by-side reader for Lingua Latina per Se Illustrata",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "npm run build && electron .",
+    "dist": "npm run build && electron-builder --win portable",
+    "dist:dir": "npm run build && electron-builder --win portable --dir"
+  },
+  "keywords": ["latin", "lingua-latina", "electron", "pdf", "reader"],
+  "author": "Willem jvr",
+  "license": "MIT",
+  "build": {
+    "appId": "com.overgrowthai.lingua-latina-study",
+    "productName": "Lingua Latina Study",
+    "directories": {
+      "output": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "portable"
+    },
+    "portable": {
+      "artifactName": "LinguaLatinaStudy-${version}.exe"
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.23",
+    "electron": "^35.2.6",
+    "electron-builder": "^26.0.12",
+    "pdfjs-dist": "^5.2.133",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
