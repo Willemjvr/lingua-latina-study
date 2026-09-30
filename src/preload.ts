@@ -13,6 +13,7 @@ const api = {
   exportBuffer: (data: { defaultName: string; bufferBase64: string; filters?: any[] }) => ipcRenderer.invoke("export-buffer", data),
   importFile: () => ipcRenderer.invoke("import-file"),
   getAppPaths: () => ipcRenderer.invoke("get-app-paths"),
+  getPdfjsPaths: () => ipcRenderer.invoke("get-pdfjs-paths"),
   showPdf: (filePath: string) => ipcRenderer.invoke("show-pdf", filePath),
   alert: (msg: string) => ipcRenderer.invoke("alert", msg),
 };

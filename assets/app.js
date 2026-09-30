@@ -22,16 +22,18 @@ const GLOBAL = { activePane: "reading", tool: "text", inkColor: "#2563eb", inkSi
 
 async function loadLibs() {
   if (typeof pdfjsLib === "undefined") {
+    const paths = await llApi.getPdfjsPaths();
     await new Promise((resolve, reject) => {
       const s = document.createElement("script");
-      s.src = "../node_modules/pdfjs-dist/build/pdf.mjs";
+      s.src = paths.pdf;
       s.type = "module";
       s.onload = resolve;
-      s.onerror = reject;
+      s.onerror = (err) => reject(new Error("Failed to load pdf.js from " + paths.pdf + ": " + (err?.message || err)));
       document.head.appendChild(s);
     });
   }
-  pdfjsLib.GlobalWorkerOptions.workerSrc = "../node_modules/pdfjs-dist/build/pdf.worker.mjs";
+  const paths = await llApi.getPdfjsPaths();
+  pdfjsLib.GlobalWorkerOptions.workerSrc = paths.worker;
 }
 
 async function init() {
@@ -122,6 +124,7 @@ async function promptForFiles() {
 }
 
 async function openBoth() {
+  if (!state.reading.path || !state.exercises.path) return;
   await openPane("reading");
   await openPane("exercises");
   renderNotesList();
@@ -292,6 +295,10 @@ function setupToolbar() {
   document.getElementById("export-data").onclick = exportData;
   document.getElementById("import-data").onclick = importData;
   document.getElementById("export-pdf").onclick = exportAnnotatedPdf;
+  document.getElementById("select-files").onclick = async () => {
+    await promptForFiles();
+    await openBoth();
+  };
 }
 
 function toggleNotes() {

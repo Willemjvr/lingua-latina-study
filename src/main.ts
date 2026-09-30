@@ -211,6 +211,15 @@ ipcMain.handle("get-app-paths", () => ({
   isDev: IS_DEV,
 }));
 
+ipcMain.handle("get-pdfjs-paths", () => ({
+  pdf: IS_DEV
+    ? path.join(__dirname, "..", "node_modules", "pdfjs-dist", "build", "pdf.mjs")
+    : path.join(__dirname, "..", "..", "app.asar.unpacked", "node_modules", "pdfjs-dist", "build", "pdf.mjs"),
+  worker: IS_DEV
+    ? path.join(__dirname, "..", "node_modules", "pdfjs-dist", "build", "pdf.worker.mjs")
+    : path.join(__dirname, "..", "..", "app.asar.unpacked", "node_modules", "pdfjs-dist", "build", "pdf.worker.mjs"),
+}));
+
 ipcMain.handle("show-pdf", (_e, filePath: string) => {
   shell.openPath(filePath);
 });
